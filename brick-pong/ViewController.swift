@@ -27,8 +27,12 @@ class ViewController: UIViewController {
     
     var initialLocation : CGPoint! //
     
+    @IBOutlet weak var backgroundImg: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.sendSubviewToBack(backgroundImg)
         
         // First, I constructed the game area with CALayers.
         // I do not want a right-side layer because I have scoreboard on the right.
@@ -56,6 +60,8 @@ class ViewController: UIViewController {
         gameContainer.layer.addSublayer(leftSideBorder)
         
         // Design improvement.
+        gameBarContainer.layer.borderWidth = 1
+        gameBarContainer.layer.borderColor = UIColor(red: 0.34, green: 0.26, blue: 0.99, alpha: 1.00).cgColor
         gameBarContainer.layer.cornerRadius = 10
         gameBarContainer.clipsToBounds = true
         pinkBar.layer.cornerRadius = 8
@@ -80,6 +86,8 @@ class ViewController: UIViewController {
         // Initial location is determined. The ball is created and added to the main view.
         initialLocation = gameContainer.center
         ball = createBall(width: 15, height: 15, loc: initialLocation, color: .white) // see function
+        ball.layer.borderWidth = 1
+        ball.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.00).cgColor
         view.addSubview(ball)
         
         // Constraints for UIViews
@@ -203,4 +211,5 @@ class ViewController: UIViewController {
             
         })
     }
+    
 }

@@ -16,6 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="844" height="390"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="My Post" translatesAutoresizingMaskIntoConstraints="NO" id="5zX-yV-AE2">
+                                <rect key="frame" x="0.0" y="0.0" width="844" height="390"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uph-wg-Klc">
                                 <rect key="frame" x="44" y="0.0" width="756" height="390"/>
                                 <subviews>
@@ -116,6 +120,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundImg" destination="5zX-yV-AE2" id="ITK-Ro-bwh"/>
                         <outlet property="blueBar" destination="sgP-ha-FpZ" id="Cui-VG-pJ0"/>
                         <outlet property="blueScore" destination="gGV-5L-V8v" id="Efu-h4-qt9"/>
                         <outlet property="gameAreaContainer" destination="Fgc-iy-5jR" id="U5p-G1-lP8"/>
@@ -131,6 +136,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="My Post" width="2075" height="1138"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
