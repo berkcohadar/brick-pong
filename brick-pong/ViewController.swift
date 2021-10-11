@@ -23,6 +23,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var pinkBar: UIView! // pinkPlayer bar
     @IBOutlet weak var blueBar: UIView! // bluePlayer bar
     
+    var ball : UIView! // play ball
+    
+    var initialLocation : CGPoint! //
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +77,10 @@ class ViewController: UIViewController {
         pinkScore.text = String(pinkScoreInt)
         blueScore.text = String(blueScoreInt)
         
-
+        // Initial location is determined. The ball is created and added to the main view.
+        initialLocation = gameContainer.center
+        ball = createBall(width: 15, height: 15, loc: initialLocation, color: .white) // see function
+        view.addSubview(ball)
         
         // Constraints for UIViews
         // gameContainer view. I determined leading, trailing, top, and bottom constraints.
@@ -112,6 +118,9 @@ class ViewController: UIViewController {
         //trailing
         NSLayoutConstraint(item: gameAreaContainer!, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: gameContainer!, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0).isActive = true
 
+        // Ball constraints.
+        
+        
         // Bar constraints. Determining locations.
         
         //NSLayoutConstraint(item: pinkBar!, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: gameAreaContainer!, attribute: NSLayoutConstraint.Attribute.leadingMargin, multiplier: 1, constant: 0).isActive = true
@@ -122,4 +131,76 @@ class ViewController: UIViewController {
         
     }
     
+    // "loc" parameter represents where the ball will take its place when it has been created.
+    // Ball will be at the center at v0.
+    // Because no movement on the ball is defined.
+    func createBall(width: Int, height: Int, loc : CGPoint, color: UIColor) -> UIView{
+        let newBall = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        newBall.center = loc
+        newBall.backgroundColor = color
+        newBall.layer.cornerRadius = newBall.layer.bounds.width / 2
+        newBall.clipsToBounds = true
+        return newBall
+    }
+    // I am planning to add some fun into the game.
+    // There will be upgrade cards.
+    // These upgrades will appear at a random time & location inside the gameAreaContainer.
+    // These upgrades will be collectible by users.
+    // If any user hits the card with the ball, he/she collects it!
+    // There also may be environment changer upgrades, so these kind of upgrades affect each user the same.
+    
+    // This functions resets the ball's location.
+    func resetBall(){
+        self.ball.center = initialLocation
+    }
+        
+    @IBAction func move(_ sender: Any) {
+        UIView.animate(withDuration: 1,
+            delay: 0.0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: UIView.AnimationOptions.curveEaseInOut,
+            animations: ({
+            self.ball.center.x -= 60
+        }), completion:{_ in
+            
+        })
+    }
+    
+    @IBAction func moveX(_ sender: Any) {
+        UIView.animate(withDuration: 1,
+            delay: 0.0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: UIView.AnimationOptions.curveEaseInOut,
+            animations: ({
+            self.ball.center.x += 60
+        }), completion:{_ in
+            
+        })
+    }
+    @IBAction func moveUp(_ sender: Any) {
+        UIView.animate(withDuration: 1,
+            delay: 0.0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: UIView.AnimationOptions.curveEaseInOut,
+            animations: ({
+            self.ball.center.y -= 60
+        }), completion:{_ in
+            
+        })
+    }
+    @IBAction func moveDown(_ sender: Any) {
+        UIView.animate(withDuration: 1,
+            delay: 0.0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: UIView.AnimationOptions.curveEaseInOut,
+            animations: ({
+            self.ball.center.y += 60
+        }), completion:{_ in
+            
+        })
+    }
 }
