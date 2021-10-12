@@ -10,7 +10,9 @@ import UIKit
 class ViewController: UIViewController {
     
     let screenSize: CGRect = UIScreen.main.bounds // the dimensions of all sides of phone
-        
+    
+    @IBOutlet weak var backgroundImg: UIImageView! // background of the game
+
     @IBOutlet weak var pinkScore: UILabel! // pinkPlayer scoreboard
     @IBOutlet weak var blueScore: UILabel! // bluePlayer scoreboard
     let pinkScoreInt: Int = 0; // pinkPlayer score value as int
@@ -25,13 +27,13 @@ class ViewController: UIViewController {
     
     var ball : UIView! // play ball
     
-    var initialLocation : CGPoint! //
+    var initialLocation : CGPoint! // Initial position of ball. When the game is started.
     
-    @IBOutlet weak var backgroundImg: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // We sent backgroundImage layer to the back, literally.
         self.view.sendSubviewToBack(backgroundImg)
         
         // First, I constructed the game area with CALayers.
@@ -62,6 +64,7 @@ class ViewController: UIViewController {
         // Design improvement.
         gameBarContainer.layer.borderWidth = 1
         gameBarContainer.layer.borderColor = UIColor(red: 0.34, green: 0.26, blue: 0.99, alpha: 1.00).cgColor
+        
         gameBarContainer.layer.cornerRadius = 10
         gameBarContainer.clipsToBounds = true
         pinkBar.layer.cornerRadius = 8
@@ -83,8 +86,11 @@ class ViewController: UIViewController {
         pinkScore.text = String(pinkScoreInt)
         blueScore.text = String(blueScoreInt)
         
-        // Initial location is determined. The ball is created and added to the main view.
+        // Initial location is determined at the beginning.
+        // The ball is created and added to the main view.
+        
         initialLocation = gameContainer.center
+        
         ball = createBall(width: 15, height: 15, loc: initialLocation, color: .white) // see function
         ball.layer.borderWidth = 1
         ball.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.00).cgColor
